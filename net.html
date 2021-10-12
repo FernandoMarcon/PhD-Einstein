@@ -1,0 +1,80 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1><h2>Pós-Graduação em Ciências da Saúde</><h3>Docentes <em>Stricto Sensus</em> 2021</h3></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 95%;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "red", "id": "Marcelino De Souza Durao Junior", "label": "Marcelino De Souza Durao Junior", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "tab:blue", "id": "Medicina Cr\u00edtica", "label": "Medicina Cr\u00edtica", "shape": "dot", "size": 30, "type": "LinhaPesquisa"}, {"color": "red", "id": "Marcelo Passos Teivelis", "label": "Marcelo Passos Teivelis", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "tab:blue", "id": "Envelhecimento", "label": "Envelhecimento", "shape": "dot", "size": 30, "type": "LinhaPesquisa"}, {"color": "red", "id": "Mario Lenza", "label": "Mario Lenza", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "red", "id": "Mois\u00e9s Cohen", "label": "Mois\u00e9s Cohen", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "red", "id": "Nelson Hamerschlak", "label": "Nelson Hamerschlak", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "tab:blue", "id": "Medicina Molecular", "label": "Medicina Molecular", "shape": "dot", "size": 30, "type": "LinhaPesquisa"}, {"color": "red", "id": "Nelson Wolosker", "label": "Nelson Wolosker", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "red", "id": "Oscar Fernando Pavao Dos Santos", "label": "Oscar Fernando Pavao Dos Santos", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "red", "id": "Patricia Maria de Carvalho Aguiar", "label": "Patricia Maria de Carvalho Aguiar", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "tab:blue", "id": "Neuroci\u00eancias", "label": "Neuroci\u00eancias", "shape": "dot", "size": 30, "type": "LinhaPesquisa"}, {"color": "red", "id": "Patricia Severino", "label": "Patricia Severino", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "red", "id": "Paulo Vidal Campregher", "label": "Paulo Vidal Campregher", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "red", "id": "Pedro Alves Lemos Neto", "label": "Pedro Alves Lemos Neto", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "red", "id": "Reynaldo Jesus Garcia Filho", "label": "Reynaldo Jesus Garcia Filho", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "red", "id": "Ricardo Weinlich", "label": "Ricardo Weinlich", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "red", "id": "Ronaldo Hueb Baroni", "label": "Ronaldo Hueb Baroni", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "red", "id": "Rui Ferreira Afonso", "label": "Rui Ferreira Afonso", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "red", "id": "Samira Saady Morhy", "label": "Samira Saady Morhy", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "red", "id": "S\u00e9rgio Eduardo Alonso Ara\u00fajo", "label": "S\u00e9rgio Eduardo Alonso Ara\u00fajo", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "red", "id": "S\u00e9rgio Podgaec", "label": "S\u00e9rgio Podgaec", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "red", "id": "Thiago Domingos Correa", "label": "Thiago Domingos Correa", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "red", "id": "Welbert De Oliveira Pereira", "label": "Welbert De Oliveira Pereira", "shape": "dot", "size": 10, "type": "Docente"}, {"color": "red", "id": "Yuri Longatto Boteon", "label": "Yuri Longatto Boteon", "shape": "dot", "size": 10, "type": "Docente"}]);
+        edges = new vis.DataSet([{"from": "Marcelino De Souza Durao Junior", "to": "Medicina Cr\u00edtica", "weight": 1}, {"from": "Marcelo Passos Teivelis", "to": "Envelhecimento", "weight": 1}, {"from": "Mario Lenza", "to": "Envelhecimento", "weight": 1}, {"from": "Mois\u00e9s Cohen", "to": "Envelhecimento", "weight": 1}, {"from": "Nelson Hamerschlak", "to": "Medicina Molecular", "weight": 1}, {"from": "Nelson Wolosker", "to": "Envelhecimento", "weight": 1}, {"from": "Oscar Fernando Pavao Dos Santos", "to": "Medicina Cr\u00edtica", "weight": 1}, {"from": "Patricia Maria de Carvalho Aguiar", "to": "Neuroci\u00eancias", "weight": 1}, {"from": "Patricia Severino", "to": "Medicina Molecular", "weight": 1}, {"from": "Paulo Vidal Campregher", "to": "Medicina Molecular", "weight": 1}, {"from": "Pedro Alves Lemos Neto", "to": "Envelhecimento", "weight": 1}, {"from": "Reynaldo Jesus Garcia Filho", "to": "Envelhecimento", "weight": 1}, {"from": "Ricardo Weinlich", "to": "Medicina Molecular", "weight": 1}, {"from": "Ronaldo Hueb Baroni", "to": "Envelhecimento", "weight": 1}, {"from": "Rui Ferreira Afonso", "to": "Neuroci\u00eancias", "weight": 1}, {"from": "Samira Saady Morhy", "to": "Envelhecimento", "weight": 1}, {"from": "S\u00e9rgio Eduardo Alonso Ara\u00fajo", "to": "Envelhecimento", "weight": 1}, {"from": "S\u00e9rgio Podgaec", "to": "Medicina Molecular", "weight": 1}, {"from": "Thiago Domingos Correa", "to": "Medicina Cr\u00edtica", "weight": 1}, {"from": "Welbert De Oliveira Pereira", "to": "Medicina Molecular", "weight": 1}, {"from": "Yuri Longatto Boteon", "to": "Medicina Cr\u00edtica", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {"edges": {"smooth": {"type": "continuous", "roundness": 0.45}}, "physics": {"barnesHut": {"springConstant": 0.035}}};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
